@@ -41,7 +41,7 @@ router.post('/', upload.single('image'), (req, res) => {
   pythonProcess.stdout.on('data', (data) => {
     console.log(data.toString());
   });
-  console.log("hello");
+  // console.log("hello");
   pythonProcess.on('error', (err) => {
     console.log(err);
   });

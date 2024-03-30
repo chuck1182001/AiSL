@@ -28,7 +28,7 @@ def predict(path, model):
         letter = predicted_class + 48
     else:
         letter = predicted_class + 87
-
+    
     return chr(letter)
 
 def load_model():
@@ -38,6 +38,9 @@ def load_model():
         param.requires_grad = False  
 
     resnet50.fc = torch.nn.Linear(resnet50.fc.in_features, 36)
-    resnet50.load_state_dict(torch.load('aisl.pth')) 
+    print(os.getcwd())
+    # f = open('/root/AiSL/Backend/aisl-express/routes/aisl.pth', 'r')
+    resnet50.load_state_dict(torch.load('/root/AiSL/Backend/aisl-express/routes/aisl.pth',  map_location=torch.device('cpu'))) 
+    # f.close()
     resnet50.eval() # Set the model to evaluation mode
     return resnet50
