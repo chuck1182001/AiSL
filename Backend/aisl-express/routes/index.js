@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const multer  = require('multer');
+var multer = require('multer');
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads/'); // specify the upload directory
+    cb(null, 'uploads/'); // specify the upload directory
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname); // generate unique filename
@@ -35,8 +35,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Define route to handle POST request with image upload
-router.post('/image', upload.single('image'), (req, res) => {
+router.post('/', upload.single('image'), (req, res) => {
   // req.file contains information about the uploaded file
+  
   if (!req.file) {
     return res.status(400).send('No files were uploaded.');
   }
