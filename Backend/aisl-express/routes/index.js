@@ -7,16 +7,16 @@ router.get('/', function(req, res, next) {
 });
 
 // router.post('/', function(req, res, next) {
-//   // const spawn = require("child_process").spawn;
-//   // const pythonProcess = spawn('python',["./test.py"]);
-//   // pythonProcess.stdout.on('data', (data) => {
-//   //   console.log(data.toString());
-//   // });
-//   // pythonProcess.on('error', (err) => {
-//   //   console.log(err);
-//   // });
-//   // const test = req.params.image;
-//   // console.log(req.params);
+//   const spawn = require("child_process").spawn;
+//   const pythonProcess = spawn('python',["./test.py"]);
+//   pythonProcess.stdout.on('data', (data) => {
+//     console.log(data.toString());
+//   });
+//   pythonProcess.on('error', (err) => {
+//     console.log(err);
+//   });
+//   const test = req.params.image;
+//   console.log(req.params);
 //   express.request.on('body', (data) => {
 //     console.log(data);
 //   });
@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/'); // specify the upload directory
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // generate unique filename
+    cb(null, file.originalname); // generate unique filename
   }
 });
 
@@ -36,8 +36,18 @@ const upload = multer({ storage: storage });
 
 // Define route to handle POST request with image upload
 router.post('/', upload.single('image'), (req, res) => {
+  const spawn = require("child_process").spawn;
+  const pythonProcess = spawn('python',["./test.py"]);
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(data.toString());
+  });
+  console.log("hello");
+  pythonProcess.on('error', (err) => {
+    console.log(err);
+  });
+
   // req.file contains information about the uploaded file
-  
+
   if (!req.file) {
     return res.status(400).send('No files were uploaded.');
   }
