@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+fetch('http://localhost:3001/')
+      .then(response => console.log(response));
+      
 root.render(
   <React.StrictMode>
     <App />
