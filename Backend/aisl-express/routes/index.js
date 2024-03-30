@@ -1,18 +1,20 @@
-const express = require('express')
-const app = express()
-const port = 3001
+var express = require('express');
+var router = express.Router();
 
-app.get('/', (req, res) => {
-  // console.log(req.socket.localPort);
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+router.post('/', function(req, res, next) {
   const spawn = require("child_process").spawn;
   const pythonProcess = spawn('python',["./test.py"]);
   pythonProcess.stdout.on('data', (data) => {
     console.log(data.toString());
   });
-  console.log(req.socket.remotePort);
+  pythonProcess.on('error', (err) => {
+    console.log(err);
+  });
   res.send('Hello World!')
-})
+});
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+module.exports = router;
