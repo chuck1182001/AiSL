@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
   const spawn = require("child_process").spawn;
   const pythonProcess = spawn('python',["./test.py"]);
   pythonProcess.stdout.on('data', (data) => {
-    console.log(data);
+    console.log(data.toString());
   });
   console.log(req.socket.remotePort);
   res.send('Hello World!')
