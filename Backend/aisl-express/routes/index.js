@@ -6,15 +6,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  const spawn = require("child_process").spawn;
-  const pythonProcess = spawn('python',["./test.py"]);
-  pythonProcess.stdout.on('data', (data) => {
-    console.log(data.toString());
-  });
-  pythonProcess.on('error', (err) => {
-    console.log(err);
-  });
-  res.send('Hello World!')
+
+  // const spawn = require("child_process").spawn;
+  // const pythonProcess = spawn('python',["./test.py"]);
+  // pythonProcess.stdout.on('data', (data) => {
+  //   console.log(data.toString());
+  // });
+  // pythonProcess.on('error', (err) => {
+  //   console.log(err);
+  // });
+  const test = req.params.image;
+  console.log(test);
+  res.send('Hello World!');
 });
 
 module.exports = router;
