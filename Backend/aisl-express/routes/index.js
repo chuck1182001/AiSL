@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+const cors = require('cors')
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -23,6 +27,11 @@ router.get('/', function(req, res, next) {
 //   res.send('Hello World!');
 // });
 
+router.use(bodyParser.json({ limit: '10mb', extended: true }));
+router.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
+router.use(cors())
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/'); // specify the upload directory
@@ -35,26 +44,55 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Define route to handle POST request with image upload
-router.post('/', upload.single('image'), (req, res) => {
-  const spawn = require("child_process").spawn;
-  const pythonProcess = spawn('python',["./test.py"]);
-  pythonProcess.stdout.on('data', (data) => {
-    console.log(data.toString());
-  });
-  // console.log("hello");
-  pythonProcess.on('error', (err) => {
-    console.log(err);
-  });
+// router.post('/', upload.single('image'), (req, res) => {
+//   const spawn = require("child_process").spawn;
+//   const pythonProcess = spawn('python',["./test.py"]);
+//   pythonProcess.stdout.on('data', (data) => {
+//     console.log(data.toString());
+//   });
+//   // console.log("hello");
+//   pythonProcess.on('error', (err) => {
+//     console.log(err);
+//   });
 
-  // req.file contains information about the uploaded file
+//   // req.file contains information about the uploaded file
 
-  if (!req.file) {
-    return res.status(400).send('No files were uploaded.');
-  }
-  // You can access the file details like req.file.path, req.file.originalname, etc.
-  // Here you can save the file path to a database or perform further processing
+//   if (!req.file) {
+//     return res.status(400).send('No files were uploaded.');
+//   }
+//   // You can access the file details like req.file.path, req.file.originalname, etc.
+//   // Here you can save the file path to a database or perform further processing
 
-  res.send('File uploaded successfully.');
-});
+//   res.send('File uploaded successfully.');
+// });
 
 module.exports = router;
+
+router.post('/', function (req, res) {
+    if (!req.body.imageSrc) {
+        return res.status(400).send('No image data found.');
+    }
+    // console.log(req.body)
+    const imageData = req.body.imageSrc.replace(/^data:image\/jpeg;base64,/, "");
+    const filePath = path.join(__dirname, 'uploads', 'image.jpg');
+    fs.writeFile(filePath, imageData, 'base64', (err) => {
+      if (err) {
+        console.error('Error saving image:', err);
+        res.status(500).send('Error saving image');
+      } else {
+        console.log('Image saved successfully');
+      }
+    });
+    const spawn = require("child_process").spawn;
+    const pythonProcess = spawn('python',["/root/AiSL/Backend/aisl-express/routes/test.py"]);
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(data.toString());
+      res.send(data.toString());
+    });
+    // console.log("hello");
+    pythonProcess.on('error', (err) => {
+      console.log(err);
+    });
+    // res.send("End of Message");
+    // res.status(403);
+})

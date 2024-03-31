@@ -38,7 +38,7 @@ def load_model():
         param.requires_grad = False  
 
     resnet50.fc = torch.nn.Linear(resnet50.fc.in_features, 36)
-    print(os.getcwd())
+    # print(os.getcwd())
     # f = open('/root/AiSL/Backend/aisl-express/routes/aisl.pth', 'r')
     resnet50.load_state_dict(torch.load('/root/AiSL/Backend/aisl-express/routes/aisl.pth',  map_location=torch.device('cpu'))) 
     # f.close()
