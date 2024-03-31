@@ -7,11 +7,28 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 import numpy as np
 from PIL import Image
+import PIL
 # from google.colab import files 
 import os
 
 def predict(path, model):
     banana = Image.open(path)
+    # print(path)
+
+    banana = banana.convert('L')
+    pixels = list(banana.getdata())
+    
+    # Calculate average grayscale value
+    average_value = sum(pixels) / len(pixels)
+    stand = np.std(pixels)
+    
+    # pixel_map = banana.load() 
+    # Extracting the width and height  
+    # of the image: 
+    banana = Image.eval(banana, lambda x: 256 if x > (average_value + stand) else x)
+
+    banana.save('greyscale.png')
+    # print("hello")
 
     transform = transforms.Compose([
         transforms.Resize((224, 224)),  # Resize to match ResNet input size
