@@ -23,21 +23,21 @@ def predict(path, model):
     pixels = list(bananacopy.getdata())
     
     # Calculate average grayscale value
-    average_value = sum(pixels) / len(pixels)
+    # average_value = sum(pixels) / len(pixels)
     # stand = np.std(pixels)
     # 0.299 ∙ Red + 0.587 ∙ Green + 0.114 ∙ Blue
     
-    width = banana.width 
-    height = banana.height 
-    # print(width,height)
-    tempBanana = banana.load()
+    # width = banana.width 
+    # height = banana.height 
+    # # print(width,height)
+    # tempBanana = banana.load()
 
-    for row in range(height):
-        for col in range(width):
-            r,g,b = tempBanana[col, row]
-            grayscale = 0.299 * r + 0.587 * g + 0.114 * b
-            if(grayscale < average_value):
-                tempBanana[col,row] = (0,0,0)
+    # for row in range(height):
+    #     for col in range(width):
+    #         r,g,b = tempBanana[col, row]
+    #         grayscale = 0.299 * r + 0.587 * g + 0.114 * b
+    #         if(grayscale < average_value):
+    #             tempBanana[col,row] = (0,0,0)
     
     banana = remove(banana)
     # Extracting the width and height  
