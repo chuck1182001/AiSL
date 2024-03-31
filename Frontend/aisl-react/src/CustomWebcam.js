@@ -117,9 +117,9 @@ const CustomWebcam = () => {
   }
 
   const handleSubmit = (e) => {
-    if (e && typeof e.preventDefault === 'function') {
+    // if (e && typeof e.preventDefault === 'function') {
       e.preventDefault();
-    }
+    // }
 
     if (imgSrc) {
       fetch('http://172.232.30.72:3001/image', {
@@ -132,7 +132,8 @@ const CustomWebcam = () => {
       .then(response => response.text())
       .then(data => { 
         console.log(data); 
-        capturedLetters.push(data);
+        setStatus(data);
+        setSubmit(true);
         setHasRead(true);
       })
     }
