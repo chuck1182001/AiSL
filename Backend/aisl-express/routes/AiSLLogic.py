@@ -8,6 +8,8 @@ import torchvision.transforms as transforms
 import numpy as np
 from PIL import Image
 import PIL
+from rembg import remove 
+
 # from google.colab import files 
 import os
 
@@ -15,17 +17,32 @@ def predict(path, model):
     banana = Image.open(path)
     # print(path)
 
-    banana = banana.convert('L')
-    pixels = list(banana.getdata())
+    
+    bananacopy = banana.copy()
+    bananacopy = bananacopy.convert('L')
+    pixels = list(bananacopy.getdata())
     
     # Calculate average grayscale value
     average_value = sum(pixels) / len(pixels)
-    stand = np.std(pixels)
+    # stand = np.std(pixels)
+    # 0.299 ∙ Red + 0.587 ∙ Green + 0.114 ∙ Blue
     
-    # pixel_map = banana.load() 
+    width = banana.width 
+    height = banana.height 
+    # print(width,height)
+    tempBanana = banana.load()
+
+    for row in range(height):
+        for col in range(width):
+            r,g,b = tempBanana[col, row]
+            grayscale = 0.299 * r + 0.587 * g + 0.114 * b
+            if(grayscale < average_value):
+                tempBanana[col,row] = (0,0,0)
+    
+    banana = remove(banana)
     # Extracting the width and height  
     # of the image: 
-    banana = Image.eval(banana, lambda x: 256 if x > (average_value + stand) else x)
+    # tempBanana = Image.eval(banana, lambda x: 256 if 0 else print(x))
 
     banana.save('greyscale.png')
     # print("hello")

@@ -7,6 +7,7 @@ const cors = require('cors');
 const port = 3001;
 
 var indexRouter = require('./routes/index');
+var generateRouter = require('./routes/generate');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/image', indexRouter);
+app.use('/generate', generateRouter);
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
