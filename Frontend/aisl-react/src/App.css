@@ -1,14 +1,74 @@
 .App {
   display: flex;
   justify-content: center;
-  padding: 128px;
+  padding: 0px;
   font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.flash-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container-1 {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
+  padding: 0px;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.flash-green {
+  animation: flash-green-animation 2s 1;
+}
+
+@keyframes flash-green-animation {
+  0% {
+    background-color: inherit;
+  }
+  50% {
+    background-color: green;
+  }
+  100% {
+    background-color: inherit;
+  }
+}
+
+.flash-red {
+  animation: flash-red-animation 2s 1;
+}
+
+@keyframes flash-red-animation {
+  0% {
+    background-color: inherit;
+  }
+  50% {
+    background-color: rgb(214, 36, 36);
+  }
+  100% {
+    background-color: inherit;
+  }
 }
 
 img,
@@ -25,7 +85,16 @@ video {
 .btn-container {
   display: flex;
   gap: 16px;
-  margin-top: 24px;
+  margin-top: 16px;
+}
+
+.btn-container-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-right: 130px;
+  margin-top: 80px;
 }
 
 .btn-container button {
@@ -42,7 +111,227 @@ video {
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.btn-container-2 button {
+  cursor: pointer;
+  display: flex;
+  outline: 0;
+  border: none;
+  margin-left: -150px;
+  margin-top: 5px;
+  margin-right: -50px;
+  text-align: left;
+  line-height: -10;
+  width: 380px;
+  height: 166px;
+  padding: 35px 30px;
+  border-radius: 8px;
+  background-color: rgb(195, 188, 238);
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-container-2 p {
+  text-align: left;
+  margin-left: -145px;
+  font-size: 24px;
+  margin-bottom: 0px;
+  font-weight: bolder;
+}
+
+.home-container {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-start;
+  height: 5vh;
+  width: 100px;
+  gap: 0px;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.home-container button {
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  padding: 15px; /* Increase padding to make the elements larger */
+  border-radius: 8px; /* Increase border-radius for rounded corners */
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: 2px solid black; /* Add a black outline */
+  font-size: 15px; /* Increase font size */
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 10vh;
+  gap: 0px;
+  margin-left: -150px;
+  margin-top: 35px;
+  overflow: hidden; /* This will hide the overflow text */
+}
+
+.ai-container panel {
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  padding: 20px; /* Increase padding to make the elements larger */
+  border-radius: 8px; /* Increase border-radius for rounded corners */
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: 2px solid black; /* Add a black outline */
+  font-size: 15px; /* Increase font size */
+  box-shadow: 0 8px 20px 0 rgb(0 118 255 / 39%); /* Adjust box-shadow */
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stories-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  gap: 10px;
+  margin-right: 230px;
+  margin-left: 40px;
+  margin-top: 20px;
+  flex-direction: column;
+  overflow: hidden; /* This will hide the overflow text */
+}
+
+.stories-container story {
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  padding: 22px; /* Increase padding to make the elements larger */
+  border-radius: 16px; /* Increase border-radius for rounded corners */
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-size: 13px; /* Increase font size */
+  box-shadow: 0 8px 20px 0 rgb(0 118 255 / 39%); /* Adjust box-shadow */
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 75vh; /* Limit the maximum height of the panel */
+  height: 40vh;
+  word-wrap: break-word; /* Ensure text wraps if it exceeds the max-width */
+
+}
+
 .btn-container button:hover {
   background: rgba(108, 76, 201, 0.9);
   box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}
+
+.header {
+  background-color: #e6a12c; /* Choose your desired background color */
+  height: 70px; /* Adjust the height of the header as needed */
+  width: 87.29%; /* Make the header full width */
+  position: absolute;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+}
+
+.header-1 {
+  height: 20px; /* Adjust the height of the header as needed */
+  width: 100%; /* Make the header full width */
+  position: absolute;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+}
+
+.header p {
+  color: white;
+  display: inline-block;
+  margin-left: 40px;
+  margin-right: 7px;
+  padding: 7px;
+}
+
+.lesson-plan-container {
+  flex-direction: row;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+.lesson-plan-container p2 {
+  margin-left: -10px;
+  margin-right: 66px;
+  font-size: 13px;
+}
+
+.lesson-plan-container p {
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+.circular-button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 100%; /* Make the border radius half of the button's width/height */
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-size: 16px;
+  border: 2px solid black; /* Add a black outline */
+  width: 80px; /* Set width and height to create a circular button */
+  height: 80px;
+  position: relative;
+  margin-right: 40px;
+}
+
+.first-button {
+  width: 85px; /* Set width and height to create a circular button */
+  height: 85px;
+  border: 5px solid rgb(60, 196, 103); /* Change the border color of the first button */
+}
+
+.circular-button::after {
+  content: "";
+  position: absolute;
+  width: 2px; /* Adjust the thickness of the line */
+  height: 10%;
+  height: 100%; /* Make the line stretch the height of the button */
+  background-color: black; /* Adjust the color of the line */
+  top: 0;
+  right: -41px; /* Position the line to the right of the button */
+  transform: rotate(90deg); /* Rotate the line 90 degrees */
+  transform-origin: center; /* Rotate around the center of the line */
+}
+
+.circular-button:hover {
+  background: rgb(97, 187, 137);
+  transform: scale(1.2); /* Increase the scale when hovering */
+}
+
+.circular-button:hover::after {
+  display:inline; /* Hide the lines when hovering over buttons */
+}
+
+.ad {
+  width: 170px;
+  height: 100vh;
+  background-image: url('./cool.jpg'); /* Replace 'path/to/your/image.jpg' with the path to your image */
+  background-size: cover; /* Ensure the image covers the entire element */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: rgb(205, 205, 205);
+  border-radius: 100%;
+  margin: 0 5px;
+  display: inline-block;
+  justify-content: center;
+}
+
+.active {
+  background-color: rgb(120, 120, 120); /* Change the color of the active dot */
 }
